@@ -1,0 +1,63 @@
+<table>
+   
+<thead>
+    <td>Pseudo</td>
+    <td>Nom</td>
+    <td>Prénom</td>
+    <td>Mail</td>
+    <td>Statut</td>
+    <td>Publier</td>
+    <td>Commenter</td>
+    <td>Valider</td>
+</thead>
+   
+<?php
+    $query = "SELECT * FROM users ORDER BY id DESC";
+    $result = mysqli_query($bdd, $query) or die(mysqli_error($bdd));
+    while($data = mysqli_fetch_array($result)) {
+?>
+
+
+    <div id="admin_user">
+        <form action="admin_users_change.php" method="post">
+            <input type="hidden" name="id" value="<?php echo($data['id']); ?>">
+            <tr>
+                <td>
+                    <a href="user.php?pseudo=<?php echo($data['pseudo']); ?>" target="_blank">
+                        <?php echo($data['pseudo']); ?>
+                    </a>
+                </td>
+                <td>
+                    <?php echo(ucfirst($data['last_name'])); ?>
+                </td>
+                <td>
+                    <?php echo(ucfirst($data['first_name'])); ?>
+                </td>
+                <td>
+                    <?php echo(strtolower($data['mail'])); ?>
+                </td>
+                <td>
+                    <select name="status" style="padding: 2.5px;" required>
+                        <option value="user" <?php if($data['status'] == 'user') { echo('selected="selected"'); } ?> >user</option>
+                        <option value="writer" <?php if($data['status'] == 'writer') { echo('selected="selected"'); } ?> >writer</option>
+                        <option value="admin" <?php if($data['status'] == 'admin') { echo('selected="selected"'); } ?> >admin</option>
+                        <option value="ban" <?php if($data['status'] == 'ban') { echo('selected="selected"'); } ?> >ban</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="checkbox" name="write_block" <?php if($data['write_block'] == 1) { echo('checked="checked"'); } ?> />
+                </td>
+                <td>
+                    <input type="checkbox" name="comment_block" <?php if($data['comment_block'] == 1) { echo('checked="checked"'); } ?> />
+                </td>
+                <td>
+                    <input type="submit" value="Modifier" style="padding: 2.5px;">
+                </td>
+            </tr>
+        </form>
+    </div>
+    
+<?php } ?>
+
+
+</table>

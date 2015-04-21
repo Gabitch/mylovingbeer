@@ -1,0 +1,62 @@
+<?php
+$query = "SELECT * FROM users WHERE id = '".$_SESSION['id']."' ";
+$result = mysqli_query($bdd, $query) or die(mysqli_error($bdd));
+$data = mysqli_fetch_array($result);
+?>
+<div id="account">
+    <div class="title">
+        <h1>INFORMATIONS GENERALES</h1>
+    </div>
+    <form action="account.php" method="post">
+        <label>Nom</label>
+        <input type="text" name="last_name" value="<?php echo($data['last_name']); ?>" required />
+
+        <br />
+
+        <label>Prénom</label>
+        <input type="text" name="first_name" value="<?php echo($data['first_name']); ?>" required />
+
+        <br />
+
+        <label>Adresse mail</label>
+        <input type="email" name="mail" value="<?php echo($data['mail']); ?>" required />
+
+        <br />
+
+        <input type="submit" value="MODIFIER LES INFORMATIONS GENERALES" name="submit_general" class="button" />
+    </form>
+    <div class="title">
+        <h1>MODIFICATION DU MOT DE PASSE</h1>
+    </div>
+    <form action="account.php" method="post">
+        <label>Ancien mot de passe</label>
+        <input type="password" name="password" required />
+
+        <br />
+
+        <label>Nouveau mot de passe</label>
+        <input type="password" name="new_password" required />
+        
+        <br />
+        
+        <label>Réentrer votre nouveau mot de passe</label>
+        <input type="password" name="verify_password" required />
+        
+        <br />
+
+        <input type="submit" value="MODIFIER LE MOT DE PASSE" name="submit_password" class="button" />
+    </form>
+    <div class="title">
+        <h1>MODIFICATION DE L'AVATAR</h1>
+    </div>
+    <form action="account.php" method="post" enctype="multipart/form-data">
+        <label>Avatar</label>
+        <input type="file" name="avatar" id="avatar" required />
+        
+        <br />
+
+        <input type="submit" value="MODIFIER L'AVATAR" name="submit_avatar" class="button" />
+
+    </form>
+    
+</div>

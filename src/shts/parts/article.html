@@ -1,0 +1,124 @@
+<div id="article">
+   
+    <div id="mark">
+        <h3>Note de l'article : </h3>
+        <?php if($data_article['mark'] == 0) { ?>
+            <span class="mark" id="zero"><?php echo($data_article['mark']); ?></span>
+        <?php } elseif($data_article['mark'] > 0) { ?>
+            <span class="mark" id="positive"><?php echo('+' . $data_article['mark']); ?></span>
+        <?php } else { ?>
+            <span class="mark" id="negative"><?php echo($data_article['mark']); ?></span>
+        <?php } ?>
+        
+        <?php if(isset($_SESSION['id'])) { ?>
+        
+<?php
+            $query = "SELECT * FROM tracker WHERE user_key = '".$_SESSION['id']."' AND article_key = '".$article_id."' ";
+            $result = mysqli_query($bdd, $query) or die(mysqli_error($bdd));
+            $data_tracker = mysqli_fetch_array($result);
+?>
+            <div id="thumbs">
+                <form action="article.php?id=<?php echo($_GET['id']); ?>" method="post">
+                    <?php if($data_tracker['mark'] == 0) { ?>
+                        <button type="submit" name="submit_mark" value="1" id="be_green" class="thumb">
+                            <i class="ion-thumbsup"></i>
+                        </button>
+                        <button type="submit" name="submit_mark" value="-1" id="be_red" class="thumb">
+                            <i class="ion-thumbsdown"></i>
+                        </button>
+                    <?php } elseif($data_tracker['mark'] > 0) { ?>
+                        <i class="ion-thumbsup" id="is_green" class="thumb"></i>
+                        <button type="submit" name="submit_mark" value="-2" id="be_red" class="thumb">
+                            <i class="ion-thumbsdown"></i>
+                        </button>
+                    <?php } else { ?>
+                        <button type="submit" name="submit_mark" value="2" id="be_green" class="thumb">
+                            <i class="ion-thumbsup"></i>
+                        </button>
+                        <i class="ion-thumbsdown" id="is_red"></i>
+                    <?php } ?>
+                </form>
+            </div>
+            <div class="clear"></div>
+
+        <?php } else { ?>
+        
+            <a href="login.php" id="info">
+                Vous devez être connecté(e) pour noter l'article !
+            </a>
+        
+        <?php } ?>
+    </div>
+
+    <div id="title_content">
+        <div id="title">
+            <?php echo(utf8_encode($data_article['title'])); ?>
+        </div>
+        <div id="content">
+            <?php echo(utf8_encode($data_article['content'])); ?>
+        </div>
+    </div>
+    
+    <div id="comment_post">
+        <?php if($data_article['comments'] == 1) { ?>
+            <div id="title">Commentez</div>
+
+            <?php
+                if(isset($_SESSION['id'])) {
+                    if($_SESSION['comment_block'] == 0) {
+            ?>
+
+                        <form action="article.php?id=<?php echo($_GET['id']); ?>" method="post">
+                            <textarea name="content_comment" id="content_comment" placeholder="Entrez votre commentaire..." required></textarea>
+                            <input type="submit" name="submit_comment" id="submit_comment" value="Commenter !" />
+                        </form>
+            <?php
+                    } else {
+            ?>
+
+                        <div id="error">
+                            Vous n'avez pas le droit de poster de commentaire !
+                        </div>
+           
+            <?php } } else { ?>
+
+                <a href="login.php" id="info">
+                    Vous devez être connecté(e) pour commenter l'article
+                </a>
+
+            <?php } ?>
+        <?php } else { ?>
+            <div id="error">
+                Les commentaires sont désactivés sur cet article.
+            </div>
+        <?php } ?>
+    </div>
+    
+<?php
+    $query_comments = "SELECT * FROM comments WHERE article_id = '".$_GET['id']."' ORDER BY created_at DESC ";
+    $result_comments = mysqli_query($bdd, $query_comments) or die(mysqli_error($bdd));
+    $data_comments = mysqli_fetch_array($result_comments);
+    if($data_comments != null) {
+        do {
+
+            $query_pseudo = "SELECT id, pseudo FROM users WHERE id = '".$data_comments['user_id']."' ";
+            $result_pseudo = mysqli_query($bdd, $query_pseudo) or die(mysqli_error($bdd));
+            $data_pseudo = mysqli_fetch_array($result_pseudo);
+        ?>
+
+           <div id="comment">
+               <a href="user.php?pseudo=<?php echo($data_pseudo['pseudo']); ?>" id="title" target="_blank">
+                   <?php echo($data_pseudo['pseudo']); ?>
+                </a>
+                <div id="content">
+                    <?php echo($data_comments['content']); ?>
+                </div>
+           </div>
+
+        <?php
+        }
+        while($data_comments = mysqli_fetch_array($result_comments));
+        ?>
+    <?php } ?>
+    
+</div>

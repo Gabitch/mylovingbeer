@@ -1,0 +1,33 @@
+<div id="user">
+    <div class="title">
+        <h1><?php echo(strtoupper($pseudo)); ?></h1>
+<?php if($pseudo == $_SESSION['pseudo']) { ?>
+        <div id="edit_button">
+            <a href="account.php"><i class="ion-edit"></i></a>
+        </div>
+<?php } ?>
+    </div>
+    <div id="avatar">
+        <?php echo('<img src="src/img/users/' . $avatar . '" alt="">'); ?>
+    </div>
+    <div id="article_list">
+        <h2>Articles écrits par <?php echo(ucfirst($pseudo)); ?> :</h2>
+        
+<?php
+        $query = "SELECT id, title, type FROM articles WHERE author_key = '".$id."' AND published = '1' ";
+        $result = mysqli_query($bdd, $query) or die(mysqli_error($bdd));
+        $data = mysqli_fetch_array($result);
+        if($data != null) {
+            echo('<ul>');
+            do {
+                echo('<li><a href="article.php?id=' . $data['id'] . '">' . utf8_encode($data['title']) . '</a></li>');
+            }
+            while($data = mysqli_fetch_array($result));
+            echo('</ul>');
+        }
+        else {
+            echo('<div class="info"><p>Cet utilisateur n\'a pas encore écrit d\'article.</p></div>');
+        }
+?>
+    </div>
+</div>

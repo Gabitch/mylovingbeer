@@ -1,0 +1,26 @@
+<?php
+$query_pseudo = "SELECT pseudo FROM users WHERE id = '".$data['author_key']."' ";
+$result_pseudo = mysqli_query($bdd, $query_pseudo) or die(mysqli_error($bdd));
+$data_pseudo = mysqli_fetch_array($result_pseudo);
+?>
+<a href="article.php?id=<?php echo($data['id']); ?>" id="article_button">
+    <div id="article_read">Lire la suite</div>
+    <div id="box">
+        <div id="article_img">
+            <img src="src/img/articles/<?php echo($data['img']); ?>" alt="">
+        </div>
+        <div id="article">
+            <div id="article_title">
+                <h3> <!-- 50 caractères -->
+                    <?php echo(utf8_encode($data['title'])); ?>
+                </h3>
+                <h5>
+                    <?php echo('Ecrit par ' . ucfirst(utf8_encode($data_pseudo['pseudo']))); ?>
+                </h5>
+            </div>
+            <div id="article_content"> <!-- 650 caractères -->
+                <?php echo(utf8_encode(substr(strip_tags($data['content']), 0, 650)) . '...'); ?>
+            </div>
+        </div>
+    </div>
+</a>

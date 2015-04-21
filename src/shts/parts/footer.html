@@ -1,0 +1,33 @@
+
+<footer>
+    <div id="footer">
+        <div class="box">
+            <div id="title">Quelques pages</div>
+            <ul>
+                <li><a href="user.php">Rechercher un utilisateur</a></li>
+                <li><a href="historical.php">Historique</a></li>
+                <?php if(isset($_SESSION['status'])) { if($_SESSION['status'] == 'admin') { ?>
+                    <li><a href="admin.php">Page admin</a></li>
+                <?php } } ?>
+            </ul>
+        </div>
+        <div class="box">
+            <div id="title">Légalement</div>
+            <ul>
+                <li><a href="cgu.php">CGU</a></li>
+                <li><a href="http://www.1and1.fr">Hébergement</a></li>
+            </ul>
+        </div>
+        <div class="box">
+            <div id="title">Nous suivre</div>
+            <ul>
+                <li><a href="http://www.facebook.com">Facebook</a></li>
+                <li><a href="http://www.twitter.com">Twitter</a></li>
+                <li><a href="http://plus.google.com">Google Plus</a></li>
+                <li><a href="http://www.youtube.com">Youtube</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+

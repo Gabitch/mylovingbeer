@@ -1,0 +1,39 @@
+<div id="signin">
+    <div class="title">
+        <h1>INSCRIPTION</h1>
+    </div>
+    <form action="signin.php" method="post">
+        <label>Nom</label>
+        <input type="text" name="last_name" placeholder="Nom" required />
+
+        <br />
+
+        <label>Prénom</label>
+        <input type="text" name="first_name" placeholder="Prénom" required />
+
+        <br />
+
+        <label>Adresse mail</label>
+        <input type="email" name="mail" placeholder="exemple@mail.com" required />
+
+        <br />
+
+        <label>Pseudo</label>
+        <input type="text" name="pseudo" placeholder="25 caractères maximum" required />
+
+        <br />
+
+        <label>Mot de passe</label>
+        <input type="password" name="password" placeholder="8 caractères minimum" required />
+
+        <br />
+
+        <label>Confirmer le mot de passe</label>
+        <input type="password" name="password_confirm" placeholder="8 caractères minimum" required />
+
+        <br />
+
+        <input type="submit" value="S'INSCRIRE" name="submit" class="button" />
+    </form>
+    <a href="login.php">Vous avez déjà un compte ? Cliquez ici !</a>
+</div>

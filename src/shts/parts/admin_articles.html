@@ -1,0 +1,55 @@
+<table>
+   
+<thead>
+    <td>Auteur</td>
+    <td>Titre de l'article</td>
+    <td>Commentaires activés</td>
+    <td>Article publié</td>
+    <td>Article bloqué</td>
+    <td>Valider</td>
+</thead>
+   
+<?php
+    $query = "SELECT * FROM articles ORDER BY id DESC";
+    $result = mysqli_query($bdd, $query) or die(mysqli_error($bdd));
+    while($data = mysqli_fetch_array($result)) {
+        $query_pseudo = "SELECT pseudo FROM users WHERE id = '".$data['author_key']."' ";
+        $result_pseudo = mysqli_query($bdd, $query_pseudo) or die(mysqli_error($bdd));
+        $data_pseudo = mysqli_fetch_array($result_pseudo)
+?>
+
+
+    <div id="admin_articles">
+        <form action="admin_articles_change.php" method="post">
+            <input type="hidden" name="id" value="<?php echo($data['id']); ?>">
+            <tr>
+                <td>
+                    <a href="user.php?pseudo=<?php echo($data_pseudo['pseudo']); ?>" target="_blank">
+                        <?php echo($data_pseudo['pseudo']); ?>
+                    </a>
+                </td>
+                <td>
+                    <a href="article.php?id=<?php echo($data['id']); ?>" target="_blank">
+                        <?php echo(utf8_encode(strtolower($data['title']))); ?>
+                    </a>
+                </td>
+                <td>
+                    <input type="checkbox" name="comments" <?php if($data['comments'] == 1) { echo('checked="checked"'); } ?> />
+                </td>
+                <td>
+                    <input type="checkbox" name="published" <?php if($data['published'] == 1) { echo('checked="checked"'); } ?> />
+                </td>
+                <td>
+                    <input type="checkbox" name="blocked" <?php if($data['blocked'] == 1) { echo('checked="checked"'); } ?> />
+                </td>
+                <td>
+                    <input type="submit" value="Modifier" style="padding: 2.5px;">
+                </td>
+            </tr>
+        </form>
+    </div>
+    
+<?php } ?>
+
+
+</table>

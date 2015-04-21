@@ -1,0 +1,16 @@
+<div id="user">
+    <div class="title">
+        <h1><?php echo(strtoupper($_GET['pseudo'])); ?></h1>
+    </div>
+    <div class="form_error">
+        <p>L'utilisateur est introuvable</p>
+    </div>
+    <form action="user.php" method="get">
+        <label>Rechercher un utilisateur</label>
+        <input type="text" name="pseudo" required />
+
+        <br />
+
+        <button class="button">RECHERCHER</button>
+    </form>
+</div>

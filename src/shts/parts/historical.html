@@ -1,0 +1,26 @@
+<div id="historical">
+    <div class="title">
+        <h1>ARTICLES CONSULTES</h1>
+    </div>
+    
+<?php
+        $query = "SELECT * FROM tracker WHERE user_key = '".$_SESSION['id']."' ORDER BY read_at DESC";
+        $result = mysqli_query($bdd, $query) or die(mysqli_error($bdd));
+        $data = mysqli_fetch_array($result);
+        if($data != null) {
+            echo('<ul>');
+            do {
+                $query_tracker = "SELECT * FROM articles WHERE id = '".$data['article_key']."' ";
+                $result_tracker = mysqli_query($bdd, $query_tracker) or die(mysqli_error($bdd));
+                $data_tracker = mysqli_fetch_array($result_tracker);
+                
+                echo('<li><a href="article.php?id=' . $data_tracker['id'] . '">' . utf8_encode($data_tracker['title']) . '</a></li>');
+            }
+            while($data = mysqli_fetch_array($result));
+            echo('</ul>');
+        }
+        else {
+            echo('<div class="info"><p>Cet utilisateur n\'a pas encore écrit d\'article.</p></div>');
+        }
+?>
+</div>

@@ -1,0 +1,42 @@
+<div id="write">
+    <div class="title">
+        <h1>ECRIRE UN ARTICLE</h1>
+    </div>
+    <form action="write.php" method="post" enctype="multipart/form-data">
+        <label>Titre</label>
+        <input type="text" name="title" placeholder="50 caractères maximum" value="<?php if(isset($title)) { echo($title); } ?>" required />
+        
+        <br />
+
+        <label>Contenu de l'article</label>
+        <textarea name="content" id="content" required><?php if(isset($content)) { echo($content); } ?></textarea>
+        <script>
+            CKEDITOR.replace( 'content', {
+                filebrowserUploadUrl : 'src/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserImageUploadUrl : 'src/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                filebrowserFlashUploadUrl : 'src/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+            });
+        </script>
+        
+        <br />
+        
+        <div class="block">
+            <label>Bar</label>
+            <input type="radio" name="type" class="type" value="bar" <?php if(isset($type) && $type == "bar") { echo('checked="checked"'); } ?> required/>
+            <label>Bière</label>
+            <input type="radio" name="type" class="type" value="beer" <?php if(isset($type) && $type == "beer") { echo('checked="checked"'); } ?> required/>
+        </div>
+        
+        <div class="block">
+            <label>Bloquer les commentaires</label>
+            <input type="checkbox" name="comments" id="comments" value="0" <?php if(isset($comments) && $comments == 0) { echo('checked="checked"'); } ?> />
+        </div>
+                
+        <label>Image de l'article</label>
+        <input type="file" name="article_img" id="article_img" />
+        
+        <br />
+        
+        <input type="submit" value="CREER L'ARTICLE" name="submit" class="button" />
+    </form>
+</div>
