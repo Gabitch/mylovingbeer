@@ -18,8 +18,6 @@
             </ul>
         </div>
         
-        
-        
         <div id="user_connect" class="<?php if(isset($_SESSION['id'])) { echo('dispb'); } else { echo('dispn'); } ?>">
             <div id="user_show" class="dispib">
                 <img src="src/img/users/<?php echo($_SESSION['avatar']); ?>" alt="" />
@@ -35,6 +33,21 @@
                     <li id="disconnect"><a href="logout.php">DECONNEXION</a></li>
                 </ul>
             </div>
+        </div>
+        <div id="account_mobile">
+            <a href="#" id="selector">
+                <i class="ion-locked"></i>
+            </a>
+            <ul id="mobile_connect_button" class="dispn">
+                <?php if(isset($_SESSION['id'])) { ?>
+                    <li><a href="write.php">ECRIRE UN ARTICLE</a></li>
+                    <?php echo('<li><a href="user.php?pseudo=' . $_SESSION['pseudo'] . '">MON COMPTE</a></li>'); ?>
+                    <li><a href="logout.php">SE DECONNECTER</a></li>
+                <?php } else { ?>
+                    <li><a href="signin.php">S'INSCRIRE</a></li>
+                    <li><a href="login.php">SE CONNECTER</a></li>
+                <?php } ?>
+            </ul>
         </div>
     </div>
 </header>

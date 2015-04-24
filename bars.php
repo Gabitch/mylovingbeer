@@ -12,7 +12,7 @@ include('src/shts/parts/bdd.html');
         <title>Bars</title>
         
         <!-- CSS -->
-        <link rel="stylesheet" href="src/css/app.css" type="text/css" />
+        <link rel="stylesheet" href="src/css/mobile.css" type="text/css" />
 
         <!-- Icons -->
         <link rel="stylesheet" href="src/css/icons/css/ionicons.min.css" type="text/css" />
@@ -30,15 +30,17 @@ include('src/shts/parts/bdd.html');
         <div class="page">
             <div id="news">
                 <div class="title">
-                    <h1>NEWS</h1>
+                    <h1>BARS</h1>
                 </div>
+                <div id="articles">
 <?php
-                $query = "SELECT * FROM articles WHERE type = 'bar' AND published = '1' ORDER BY id DESC LIMIT 25";
-                $result = mysqli_query($bdd, $query) or die(mysqli_error($bdd));
-                while($data = mysqli_fetch_array($result)) {
-                    include('src/shts/parts/news_tests.html');
-                }
+                    $query = "SELECT * FROM articles WHERE type = 'bar' AND published = '1' ORDER BY id DESC LIMIT 25";
+                    $result = mysqli_query($bdd, $query) or die(mysqli_error($bdd));
+                    while($data = mysqli_fetch_array($result)) {
+                        include('src/shts/parts/news_tests.html');
+                    }
 ?>
+                </div>
             </div>
         </div>
         

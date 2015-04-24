@@ -24,4 +24,14 @@ jQuery(document).ready(function () {
             $(this).parent('#user_show').parent('#user_connect').find('#arrow').toggleClass('ion-ios-arrow-back');
         });
     });
+    
+    $(function () {
+        $(document).on('click', "#selector", function () {
+            $(this).parent('#account_mobile').find('#mobile_connect_button').toggleClass('dispn');
+            $(this).parent('#account_mobile').find('#mobile_connect_button').toggleClass('dispib');
+            
+            $(this).find('i').toggleClass('ion-locked');
+            $(this).find('i').toggleClass('ion-unlocked');
+        });
+    });
 });

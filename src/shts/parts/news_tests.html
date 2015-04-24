@@ -3,7 +3,7 @@ $query_pseudo = "SELECT pseudo FROM users WHERE id = '".$data['author_key']."' "
 $result_pseudo = mysqli_query($bdd, $query_pseudo) or die(mysqli_error($bdd));
 $data_pseudo = mysqli_fetch_array($result_pseudo);
 ?>
-<a href="article.php?id=<?php echo($data['id']); ?>" id="article_button">
+<a href="article.php?id=<?php echo($data['id']); ?>" class="<?php if($data['type'] == 'bar') { echo('green'); } else { echo('purple'); } ?>" id="article_button">
     <div id="article_read">Lire la suite</div>
     <div id="box">
         <div id="article_img">

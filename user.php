@@ -26,7 +26,7 @@ include('src/shts/parts/bdd.html');
     </head>
     <body>
         <?php include('src/shts/parts/header.html'); ?>
-        <div class="page">>
+        <div class="page">
    
 <?php
 if(isset($_GET['pseudo'])) {

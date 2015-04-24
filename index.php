@@ -13,6 +13,8 @@ include('src/shts/parts/bdd.html');
         
         <!-- CSS -->
         <link rel="stylesheet" href="src/css/app.css" type="text/css" />
+        
+        
         <!-- Icons -->
         <link rel="stylesheet" href="src/css/icons/css/ionicons.min.css" type="text/css" />
         
